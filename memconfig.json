@@ -1,0 +1,236 @@
+{
+  "dependencies": {
+    "sys_user": "sys-user:"
+  },
+  "schema": {
+    "types": [
+      {
+        "name": "Root",
+        "description": "Send text messages or email to yourself",
+        "actions": [],
+        "fields": [
+          {
+            "name": "sms",
+            "description": "Send yourself text messages",
+            "type": "Sms",
+            "params": [],
+            "hints": {}
+          },
+          {
+            "name": "email",
+            "description": "Send yourself emails",
+            "type": "Email",
+            "params": [],
+            "hints": {}
+          },
+          {
+            "name": "gref",
+            "description": "A reference to this node",
+            "type": "Ref",
+            "ofType": "Root",
+            "params": [],
+            "hints": {}
+          }
+        ],
+        "events": []
+      },
+      {
+        "name": "Sms",
+        "description": "",
+        "actions": [
+          {
+            "name": "configure",
+            "description": "Configure your phone number to receive text messages. This action must be invoked before trying to send messages.",
+            "type": "Void",
+            "params": [
+              {
+                "name": "number",
+                "type": "String"
+              }
+            ],
+            "hints": {}
+          },
+          {
+            "name": "send",
+            "description": "Sends an SMS to the configured phone number",
+            "type": "Void",
+            "params": [
+              {
+                "name": "message",
+                "type": "String"
+              }
+            ],
+            "hints": {}
+          },
+          {
+            "name": "handleSms",
+            "description": "Tells the user program that an sms was received. You don't normally have to use this.",
+            "type": "Void",
+            "params": [
+              {
+                "name": "message",
+                "type": "String"
+              }
+            ],
+            "hints": {
+              "hidden": true
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "channel",
+            "description": "",
+            "type": "Channel",
+            "params": [],
+            "hints": {}
+          },
+          {
+            "name": "gref",
+            "description": "A reference to this node",
+            "type": "Ref",
+            "ofType": "Sms",
+            "params": [],
+            "hints": {}
+          }
+        ],
+        "events": []
+      },
+      {
+        "name": "Email",
+        "description": "",
+        "actions": [
+          {
+            "name": "configure",
+            "description": "Configure your email address to receive emails. This action must be invoked before trying to send a any emails.",
+            "type": "Void",
+            "params": [
+              {
+                "name": "number",
+                "type": "String"
+              }
+            ],
+            "hints": {}
+          },
+          {
+            "name": "send",
+            "description": "Sends an email to the configured email address",
+            "type": "Void",
+            "params": [
+              {
+                "name": "message",
+                "type": "String"
+              }
+            ],
+            "hints": {}
+          },
+          {
+            "name": "handleEmail",
+            "description": "Tells the `user` program that an email was received. You don't normally have to use this.",
+            "type": "Void",
+            "params": [
+              {
+                "name": "message",
+                "type": "String"
+              }
+            ],
+            "hints": {
+              "hidden": true
+            }
+          }
+        ],
+        "fields": [
+          {
+            "name": "channel",
+            "description": "",
+            "type": "Channel",
+            "params": [],
+            "hints": {}
+          },
+          {
+            "name": "gref",
+            "description": "A reference to this node",
+            "type": "Ref",
+            "ofType": "Email",
+            "params": [],
+            "hints": {}
+          }
+        ],
+        "events": []
+      },
+      {
+        "name": "Channel",
+        "description": "A communication channel that can be used to tell or ask something from a person.\n\n If you use Channels in your programs, you can easily swap them out for other Channels as needed.",
+        "actions": [
+          {
+            "name": "tell",
+            "description": "",
+            "type": "Void",
+            "params": [
+              {
+                "name": "message",
+                "type": "String"
+              }
+            ],
+            "hints": {}
+          },
+          {
+            "name": "ask",
+            "description": "",
+            "type": "String",
+            "params": [
+              {
+                "name": "question",
+                "type": "String"
+              }
+            ],
+            "hints": {}
+          }
+        ],
+        "fields": [
+          {
+            "name": "gref",
+            "description": "A reference to this node",
+            "type": "Ref",
+            "ofType": "Channel",
+            "params": [],
+            "hints": {}
+          }
+        ],
+        "events": [
+          {
+            "name": "received",
+            "description": "",
+            "type": "ReceivedEvent",
+            "params": [],
+            "hints": {}
+          }
+        ]
+      },
+      {
+        "name": "ReceivedEvent",
+        "description": "",
+        "actions": [],
+        "fields": [
+          {
+            "name": "message",
+            "description": "",
+            "type": "String",
+            "params": [],
+            "hints": {}
+          },
+          {
+            "name": "gref",
+            "description": "A reference to this node",
+            "type": "Ref",
+            "ofType": "ReceivedEvent",
+            "params": [],
+            "hints": {}
+          }
+        ],
+        "events": []
+      }
+    ]
+  }
+}
+
